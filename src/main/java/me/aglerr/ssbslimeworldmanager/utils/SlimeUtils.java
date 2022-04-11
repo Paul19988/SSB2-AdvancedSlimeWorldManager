@@ -8,7 +8,6 @@ import com.grinderwolf.swm.api.loaders.SlimeLoader;
 import com.grinderwolf.swm.api.world.SlimeWorld;
 import com.grinderwolf.swm.api.world.properties.SlimeProperties;
 import com.grinderwolf.swm.api.world.properties.SlimePropertyMap;
-import com.grinderwolf.swm.nms.CraftSlimeWorld;
 import me.aglerr.ssbslimeworldmanager.ConfigValue;
 import me.aglerr.ssbslimeworldmanager.tasks.TaskManager;
 import org.bukkit.Bukkit;
@@ -101,15 +100,6 @@ public final class SlimeUtils {
     }
 
     public void unloadWorld(String worldName){
-        SlimeWorld slimeWorld = this.islandWorlds.get(worldName);
-        if(slimeWorld != null){
-            try{
-                byte[] serializedWorld = ((CraftSlimeWorld) slimeWorld).serialize();
-                this.slimeLoader.saveWorld(slimeWorld.getName(), serializedWorld, true);
-            } catch (Exception ex){
-                ex.printStackTrace();
-            }
-        }
         if(Bukkit.getWorld(worldName) != null){
             Bukkit.unloadWorld(worldName, true);
         }
